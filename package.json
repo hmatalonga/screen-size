@@ -1,7 +1,7 @@
 {
-  "name": "viewport-size",
+  "name": "screen-size",
   "version": "1.0.0",
-  "description": "Check your device viewport size ",
+  "description": "Check your device screen size",
   "author": "Hugo Matalonga <hmatalonga@gmail.com>",
   "private": true,
   "scripts": {
