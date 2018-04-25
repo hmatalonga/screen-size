@@ -1,64 +1,77 @@
 <template>
   <section class="container">
-    <div>
-      <app-logo/>
-      <h1 class="title">
-        viewport-size
-      </h1>
-      <h2 class="subtitle">
-        Check your device viewport size 
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey">GitHub</a>
-      </div>
-    </div>
+    <h1 class="title">{{ screenResolution }}</h1>
+    <footer>
+      <p>
+        <span>A small experimental project by <a class="underline" href="http://hmatalonga.com/">Hugo Matalonga</a></span>
+        <a href="https://twitter.com/hmatalonga" class="twitter-follow-button" data-show-count="false">Follow @hmatalonga</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </p>
+    </footer>
   </section>
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo.vue'
-
 export default {
-  components: {
-    AppLogo
+  data () {
+    return {
+      screen: {
+        width: 0,
+        height: 0,
+      }
+    }
+  },
+  computed: {
+    screenResolution () {
+      return `${this.screen.width}x${this.screen.height}`
+    }
+  },
+  methods: {
+    setViewport () {
+        this.screen.width = window.screen.width
+        this.screen.height = window.screen.height
+    }
+  },
+  mounted () {
+    this.setViewport()
   }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .container {
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-}
-
-.title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+  background: linear-gradient(rgba(0, 0, 0, 0.45),rgba(0, 0, 0, 0.45)),
+              url(https://source.unsplash.com/category/nature) no-repeat scroll 50%/cover transparent;
+  .title {
+    font-size: 16vmin;
+  }
+  footer {
+    position: fixed;
+    bottom: 1vh;
+    width: 100%;
+    p {
+      letter-spacing: -.5px;
+      span {
+        position: relative;
+        left: -5px;
+        top: -7.5px;
+        a.underline {
+          color: inherit;
+          text-decoration: none;
+          border-bottom: 3px solid #EF6E7E;
+          box-shadow: inset 0 -4px 0 #EF6E7E;
+          transition: background .15s cubic-bezier(.33,.66,.66,1);
+        }
+        a.underline:hover {
+          background-color: #EF6E7E;
+        }
+      }
+    }
+  }
 }
 </style>
