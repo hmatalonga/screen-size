@@ -1,6 +1,10 @@
 <template>
   <section class="container">
-    <h1 class="title">{{ screenResolution }}</h1>
+    <div class="spinner" v-if="isLoading">
+      <div class="dot1"></div>
+      <div class="dot2"></div>
+    </div>
+    <h1 class="title" v-else>{{ screenResolution }}</h1>
     <footer>
       <p>
         <span>A small experimental project by <a class="underline" href="http://hmatalonga.com/">Hugo Matalonga</a></span>
@@ -14,6 +18,7 @@
 export default {
   data () {
     return {
+      isLoading: true,
       screen: {
         width: 0,
         height: 0,
@@ -29,6 +34,7 @@ export default {
     setViewport () {
         this.screen.width = window.screen.width
         this.screen.height = window.screen.height
+        this.isLoading = false
     }
   },
   mounted () {
@@ -47,6 +53,54 @@ export default {
   text-align: center;
   background: linear-gradient(rgba(0, 0, 0, 0.45),rgba(0, 0, 0, 0.45)),
               url(https://source.unsplash.com/category/nature) no-repeat scroll 50%/cover transparent;
+  .spinner {
+    margin: 100px auto;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    text-align: center;
+    
+    -webkit-animation: sk-rotate 2.0s infinite linear;
+    animation: sk-rotate 2.0s infinite linear;
+  }
+
+  .dot1, .dot2 {
+    width: 60%;
+    height: 60%;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    background-color: white;
+    border-radius: 100%;
+    
+    -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+    animation: sk-bounce 2.0s infinite ease-in-out;
+  }
+
+  .dot2 {
+    top: auto;
+    bottom: 0;
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+  }
+
+  @-webkit-keyframes sk-rotate { 100% { -webkit-transform: rotate(360deg) }}
+  @keyframes sk-rotate { 100% { transform: rotate(360deg); -webkit-transform: rotate(360deg) }}
+
+  @-webkit-keyframes sk-bounce {
+    0%, 100% { -webkit-transform: scale(0.0) }
+    50% { -webkit-transform: scale(1.0) }
+  }
+
+  @keyframes sk-bounce {
+    0%, 100% { 
+      transform: scale(0.0);
+      -webkit-transform: scale(0.0);
+    } 50% { 
+      transform: scale(1.0);
+      -webkit-transform: scale(1.0);
+    }
+  }
   .title {
     font-size: 16vmin;
   }
