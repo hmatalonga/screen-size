@@ -1,5 +1,7 @@
 # Screen size is...
 
+[![Build Status](https://travis-ci.org/hmatalonga/screen-size.svg?branch=master)](https://travis-ci.org/hmatalonga/screen-size)
+
 > Quickly check your device screen size
 
 [http://hmatalonga.com/screen-size/](http://hmatalonga.com/screen-size/)
